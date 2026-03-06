@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法國自由行實戰手冊（精華版）</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .day-card {
+            background: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .day-title {
+            color: #e67e22;
+            margin-top: 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .phrase-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        .phrase-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .zh { font-weight: bold; color: #444; }
+        .fr { 
+            color: #2980b9; 
+            font-size: 1.1em; 
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .pronunciation { color: #7f8c8d; font-size: 0.9em; }
+        
+        /* 按鈕樣式設定 */
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+        button {
+            border: none;
+            border-radius: 5px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+            color: white;
+        }
+        button:active { transform: scale(0.98); }
+        
+        /* 正常語速按鈕 */
+        .btn-normal { background-color: #3498db; }
+        .btn-normal:hover { background-color: #2980b9; }
+        
+        /* 慢速語速按鈕 */
+        .btn-slow { background-color: #2ecc71; color: #2c3e50; font-weight: bold;}
+        .btn-slow:hover { background-color: #27ae60; color: white;}
+
+        /* 數字網格排版 */
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .number-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .number-box .zh { font-size: 1.5em; color: #e74c3c; margin-bottom: 5px; }
+        .number-box .fr { justify-content: center; font-size: 1.2em; }
+        .number-box .btn-group { justify-content: center; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>📘 法國自由行實戰手冊<br><span style="font-size: 0.6em; color: #7f8c8d;">（3 大人 1 小孩 | 美食與購物精華版）</span></h1>
+
+    <div class="day-card">
+        <h2 class="day-title">Part 1｜萬用生存句</h2>
+        <div class="phrase-item">
+            <div class="zh">中文：你好！</div>
+            <div class="fr">法語：Bonjour ! 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Bonjour !`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Bonjour !`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：bohn-zhoor</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：我們三位大人和一位小孩。</div>
+            <div class="fr">法語：Nous sommes trois adultes et un enfant. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Nous sommes trois adultes et un enfant.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Nous sommes trois adultes et un enfant.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：noo som trwah ah-dult eh uhn ahn-fahnt</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：多少錢？</div>
+            <div class="fr">法語：C’est combien ? 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`C’est combien ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`C’est combien ?`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：seh kohm-byen</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：（店員常回）總共 15 歐元。 <span style="font-size: 0.8em; color: #7f8c8d; font-weight: normal;">(數字會依實際金額變動)</span></div>
+            <div class="fr">法語：Ça fait 15 euros. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Ça fait quinze euros.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Ça fait quinze euros.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：sah feh kanz uh-ro</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：可以刷卡嗎？</div>
+            <div class="fr">法語：On peut payer par carte ? 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`On peut payer par carte ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`On peut payer par carte ?`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：on puh pay-yay par kart</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：謝謝！</div>
+            <div class="fr">法語：Merci beaucoup ! 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Merci beaucoup !`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Merci beaucoup !`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：mehr-see boh-koo</div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <h2 class="day-title">Part 2｜麵包與甜點店（法棍、可頌、馬卡龍、特色甜點）</h2>
+        <div class="phrase-item">
+            <div class="zh">中文：請給我一根傳統法棍，別烤太脆。</div>
+            <div class="fr">法語：Une baguette tradition pas trop cuite, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Une baguette tradition pas trop cuite, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Une baguette tradition pas trop cuite, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：ewn bah-get tra-dee-syon pah tro kwee-t, seel voo pleh</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：我還要三個可頌和一個巧克力麵包給小孩。</div>
+            <div class="fr">法語：Je voudrais aussi trois croissants et un pain au chocolat pour l'enfant. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Je voudrais aussi trois croissants et un pain au chocolat pour l'enfant.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Je voudrais aussi trois croissants et un pain au chocolat pour l'enfant.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh oh-see trwah kwa-san eh uhn pan oh shoh-ko-lah poor lahn-fahn</div>
+        </div>
+        
+        <div class="phrase-item">
+            <div class="zh">中文：我要一個檸檬塔和一個巧克力閃電泡芙。</div>
+            <div class="fr">法語：Je voudrais une tartelette au citron et un éclair au chocolat. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Je voudrais une tartelette au citron et un éclair au chocolat.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Je voudrais une tartelette au citron et un éclair au chocolat.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh ewn tar-tuh-let oh see-trohn eh uhn ay-klehr oh sho-ko-lah</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：我還要一個開心果泡芙和一個可頌。</div>
+            <div class="fr">法語：Je voudrais aussi un chou pistache et un croissant. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Je voudrais aussi un chou pistache et un croissant.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Je voudrais aussi un chou pistache et un croissant.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh oh-see uhn shoo pees-tash eh uhn krwah-sahn</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：請問有馬卡龍嗎？</div>
+            <div class="fr">法語：Avez-vous des macarons ? 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Avez-vous des macarons ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Avez-vous des macarons ?`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：ah-vay voo day mah-kah-rohn</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：我想要一盒六入的馬卡龍。</div>
+            <div class="fr">法語：Je voudrais un coffret de six macarons. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Je voudrais un coffret de six macarons.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Je voudrais un coffret de six macarons.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh uhn ko-fray duh sees mah-kah-rohn</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：我要兩個香草的、兩個巧克力的、兩個覆盆子的。</div>
+            <div class="fr">法語：Deux à la vanille, deux au chocolat et deux à la framboise. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Deux à la vanille, deux au chocolat et deux à la framboise.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Deux à la vanille, deux au chocolat et deux à la framboise.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：duh ah lah vah-neey, duh oh sho-ko-lah eh duh ah lah frahm-bwahz</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：外帶，就這樣，謝謝。</div>
+            <div class="fr">法語：À emporter. C'est tout, merci. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`À emporter. C'est tout, merci.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`À emporter. C'est tout, merci.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：ah om-por-tay. seh too, mehr-see</div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <h2 class="day-title">Part 3｜餐廳實戰（入座、點餐、結帳）</h2>
+        <div class="phrase-item">
+            <div class="zh">中文：你好，我們有三位大人和一位小孩。</div>
+            <div class="fr">法語：Bonjour, une table pour trois adultes et un enfant, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Bonjour, une table pour trois adultes et un enfant, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Bonjour, une table pour trois adultes et un enfant, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：bohn-zhoor, ewn tah-bluh poor trwah ah-dult eh uhn ahn-fahn, seel voo pleh</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：我們想要坐戶外 / 室內。</div>
+            <div class="fr">法語：En terrasse / À l'intérieur, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`En terrasse ou À l'intérieur, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`En terrasse ou À l'intérieur, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：ahn te-ras / ah lan-teh-ree-ur, seel voo pleh</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：可以給我們一張兒童椅嗎？</div>
+            <div class="fr">法語：Avez-vous une chaise haute, s'il vous plaît ? 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Avez-vous une chaise haute, s'il vous plaît ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Avez-vous une chaise haute, s'il vous plaît ?`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：ah-vay voo ewn shez oht, seel voo pleh</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：可以給我們英文菜單嗎？</div>
+            <div class="fr">法語：Avez-vous un menu en anglais ? 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Avez-vous un menu en anglais ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Avez-vous un menu en anglais ?`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：ah-vay voo uhn muh-nu ahn ahn-gleh</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：你們推薦什麼？</div>
+            <div class="fr">法語：Qu’est-ce que vous recommandez ? 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Qu’est-ce que vous recommandez ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Qu’est-ce que vous recommandez ?`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：keh-skuh voo reh-koh-mahn-day</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：我們要點三份主餐。這個是什麼？</div>
+            <div class="fr">法語：Nous allons prendre trois plats principaux. C’est quoi ? 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Nous allons prendre trois plats principaux. C’est quoi ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Nous allons prendre trois plats principaux. C’est quoi ?`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：noo zah-lohn prahn-druh trwah plah pran-see-po. seh kwah</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：給小孩一份兒童餐，飲料要水，不要酒精。</div>
+            <div class="fr">法語：Un menu enfant, avec de l'eau, sans alcool s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Un menu enfant, avec de l'eau, sans alcool s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Un menu enfant, avec de l'eau, sans alcool s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：uhn muh-nu ahn-fahn, ah-vek duh loh, sahn al-kol seel voo pleh</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：請給我們一壺免費的自來水。</div>
+            <div class="fr">法語：Une carafe d’eau, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Une carafe d’eau, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Une carafe d’eau, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：ewn ka-raf doh, seel voo pleh</div>
+        </div>
+        <div class="phrase-item">
+            <div class="zh">中文：很好吃！麻煩結帳。</div>
+            <div class="fr">法語：C’était très bon ! L’addition, s’il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`C’était très bon ! L’addition, s’il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`C’était très bon ! L’addition, s’il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：say-tay treh boh ! lah-dee-syon, seel voo pleh</div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <h2 class="day-title">Part 4｜實用數字（1-10）</h2>
+        <div class="numbers-grid">
+            <div class="number-box">
+                <div class="zh">1</div>
+                <div class="fr">Un</div>
+                <div class="pronunciation">uhn</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Un`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Un`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">2</div>
+                <div class="fr">Deux</div>
+                <div class="pronunciation">duh</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Deux`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Deux`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">3</div>
+                <div class="fr">Trois</div>
+                <div class="pronunciation">trwah</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Trois`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Trois`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">4</div>
+                <div class="fr">Quatre</div>
+                <div class="pronunciation">katr</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Quatre`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Quatre`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">5</div>
+                <div class="fr">Cinq</div>
+                <div class="pronunciation">sank</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Cinq`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Cinq`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">6</div>
+                <div class="fr">Six</div>
+                <div class="pronunciation">sees</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Six`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Six`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">7</div>
+                <div class="fr">Sept</div>
+                <div class="pronunciation">set</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Sept`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Sept`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">8</div>
+                <div class="fr">Huit</div>
+                <div class="pronunciation">weet</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Huit`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Huit`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">9</div>
+                <div class="fr">Neuf</div>
+                <div class="pronunciation">nuhf</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Neuf`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Neuf`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="number-box">
+                <div class="zh">10</div>
+                <div class="fr">Dix</div>
+                <div class="pronunciation">dees</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speak(`Dix`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speak(`Dix`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function speak(text, rate = 1) {
+            var utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'fr-FR';
+            utterance.rate = rate;
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
