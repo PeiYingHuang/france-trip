@@ -10,7 +10,7 @@
             line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
-            /* 底部留白，避免被播放列擋住 */
+            /* 底部留白加高，避免被播放列擋住 */
             padding: 20px 20px 100px 20px; 
             background-color: #f4f7f6;
             color: #333;
@@ -34,7 +34,26 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
             margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
+        
+        .btn-part-play {
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.7em;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-part-play:hover { background-color: #9b59b6; }
+        .btn-part-play:active { transform: scale(0.95); }
+
         .phrase-item {
             margin-bottom: 15px;
             padding-bottom: 15px;
@@ -63,7 +82,7 @@
         }
         .pronunciation { color: #7f8c8d; font-size: 0.9em; }
         
-        /* 按鈕樣式設定 */
+        /* 一般按鈕樣式設定 */
         .btn-group {
             display: flex;
             gap: 8px;
@@ -79,11 +98,9 @@
         }
         button:active { transform: scale(0.98); }
         
-        /* 正常語速按鈕 */
+        /* 正常/慢速語速按鈕 */
         .btn-normal { background-color: #3498db; }
         .btn-normal:hover { background-color: #2980b9; }
-        
-        /* 慢速語速按鈕 */
         .btn-slow { background-color: #2ecc71; color: #2c3e50; font-weight: bold;}
         .btn-slow:hover { background-color: #27ae60; color: white;}
 
@@ -118,22 +135,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
             box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
             z-index: 1000;
         }
         .player-btn {
-            padding: 10px 20px;
-            font-size: 1em;
+            padding: 10px 18px;
+            font-size: 0.95em;
             font-weight: bold;
             border-radius: 30px;
         }
         .btn-play { background-color: #f1c40f; color: #2c3e50; }
         .btn-play:hover { background-color: #f39c12; }
+        .btn-pause { background-color: #e67e22; color: white; display: none; }
+        .btn-pause.active { background-color: #d35400; }
         .btn-stop { background-color: #e74c3c; }
         .btn-stop:hover { background-color: #c0392b; }
         .btn-loop { background-color: #34495e; border: 1px solid #7f8c8d; }
-        .btn-loop.active { background-color: #e67e22; border-color: #e67e22; }
+        .btn-loop.active { background-color: #1abc9c; border-color: #1abc9c; }
 
     </style>
 </head>
@@ -141,8 +161,11 @@
 
     <h1>📘 法國自由行實戰手冊<br><span style="font-size: 0.6em; color: #7f8c8d;">（3 大人 1 小孩 | 雙語跟讀版）</span></h1>
 
-    <div class="day-card">
-        <h2 class="day-title">Part 1｜萬用生存與打招呼</h2>
+    <div class="day-card" id="part1">
+        <h2 class="day-title">
+            <span>Part 1｜萬用生存與打招呼</span>
+            <button class="btn-part-play" onclick="startPlay(document.getElementById('part1'))">▶️ 播放此區塊</button>
+        </h2>
         <div class="phrase-item" data-zh="你好" data-fr="Bonjour !">
             <div class="zh">中文：你好！</div>
             <div class="fr">法語：Bonjour ! 
@@ -152,6 +175,17 @@
                 </div>
             </div>
             <div class="pronunciation">發音：bohn-zhoor</div>
+        </div>
+        
+        <div class="phrase-item" data-zh="不好意思，請問..." data-fr="Excusez-moi...">
+            <div class="zh">中文：不好意思，請問...</div>
+            <div class="fr">法語：Excusez-moi... 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Excusez-moi...`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Excusez-moi...`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：eks-kew-zay mwah</div>
         </div>
         
         <div class="phrase-item" data-zh="我叫 Penny" data-fr="Je m'appelle Penny.">
@@ -267,8 +301,21 @@
         </div>
     </div>
 
-    <div class="day-card">
-        <h2 class="day-title">Part 2｜麵包與甜點店</h2>
+    <div class="day-card" id="part2">
+        <h2 class="day-title">
+            <span>Part 2｜麵包與甜點店</span>
+            <button class="btn-part-play" onclick="startPlay(document.getElementById('part2'))">▶️ 播放此區塊</button>
+        </h2>
+        <div class="phrase-item" data-zh="請給我兩根傳統法棍。" data-fr="Deux baguettes tradition, s'il vous plaît.">
+            <div class="zh">中文：請給我兩根傳統法棍。</div>
+            <div class="fr">法語：Deux baguettes tradition, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Deux baguettes tradition, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Deux baguettes tradition, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：duh bah-get tra-dee-syon, seel voo pleh</div>
+        </div>
         <div class="phrase-item" data-zh="請給我一根傳統法棍，別烤太脆。" data-fr="Une baguette tradition pas trop cuite, s'il vous plaît.">
             <div class="zh">中文：請給我一根傳統法棍，別烤太脆。</div>
             <div class="fr">法語：Une baguette tradition pas trop cuite, s'il vous plaît. 
@@ -279,15 +326,66 @@
             </div>
             <div class="pronunciation">發音：ewn bah-get tra-dee-syon pah tro kwee-t, seel voo pleh</div>
         </div>
-        <div class="phrase-item" data-zh="我還要三個可頌和一個巧克力麵包給小孩。" data-fr="Je voudrais aussi trois croissants et un pain au chocolat pour l'enfant.">
-            <div class="zh">中文：我還要三個可頌和一個巧克力麵包給小孩。</div>
-            <div class="fr">法語：Je voudrais aussi trois croissants et un pain au chocolat pour l'enfant. 
+        <div class="phrase-item" data-zh="我要三個巧克力可頌。" data-fr="Je voudrais trois pains au chocolat.">
+            <div class="zh">中文：我要三個巧克力可頌。</div>
+            <div class="fr">法語：Je voudrais trois pains au chocolat. 
                 <div class="btn-group">
-                    <button class="btn-normal" onclick="speakManual(`Je voudrais aussi trois croissants et un pain au chocolat pour l'enfant.`, 1)">🔊 正常</button>
-                    <button class="btn-slow" onclick="speakManual(`Je voudrais aussi trois croissants et un pain au chocolat pour l'enfant.`, 0.6)">🐢 慢速</button>
+                    <button class="btn-normal" onclick="speakManual(`Je voudrais trois pains au chocolat.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Je voudrais trois pains au chocolat.`, 0.6)">🐢 慢速</button>
                 </div>
             </div>
-            <div class="pronunciation">發音：zhuh voo-dreh oh-see trwah kwa-san eh uhn pan oh shoh-ko-lah poor lahn-fahn</div>
+            <div class="pronunciation">發音：zhuh voo-dreh trwah pan oh sho-ko-lah</div>
+        </div>
+
+        <div class="phrase-item" data-zh="我要一份奶油砂糖可麗餅。" data-fr="Je voudrais une crêpe beurre-sucre, s'il vous plaît.">
+            <div class="zh">中文：我要一份奶油砂糖可麗餅。</div>
+            <div class="fr">法語：Je voudrais une crêpe beurre-sucre, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Je voudrais une crêpe beurre-sucre, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Je voudrais une crêpe beurre-sucre, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh ewn krep bur-sew-kr, seel voo pleh</div>
+        </div>
+        <div class="phrase-item" data-zh="我要一份檸檬砂糖可麗餅。" data-fr="Je voudrais une crêpe citron-sucre, s'il vous plaît.">
+            <div class="zh">中文：我要一份檸檬砂糖可麗餅。</div>
+            <div class="fr">法語：Je voudrais une crêpe citron-sucre, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Je voudrais une crêpe citron-sucre, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Je voudrais une crêpe citron-sucre, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh ewn krep see-trohn-sew-kr, seel voo pleh</div>
+        </div>
+        <div class="phrase-item" data-zh="我要一份巧克力榛果醬香蕉可麗餅。" data-fr="Je voudrais une crêpe Nutella-banane, s'il vous plaît.">
+            <div class="zh">中文：我要一份巧克力榛果醬香蕉可麗餅。</div>
+            <div class="fr">法語：Je voudrais une crêpe Nutella-banane, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Je voudrais une crêpe Nutella-banane, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Je voudrais une crêpe Nutella-banane, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh ewn krep noo-tel-lah bah-nahn, seel voo pleh</div>
+        </div>
+        <div class="phrase-item" data-zh="我要一份經典完整蕎麥薄餅。" data-fr="Je voudrais une galette complète, s'il vous plaît.">
+            <div class="zh">中文：我要一份經典完整蕎麥薄餅。</div>
+            <div class="fr">法語：Je voudrais une galette complète, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Je voudrais une galette complète, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Je voudrais une galette complète, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh ewn gah-let kohm-plet, seel voo pleh</div>
+        </div>
+        <div class="phrase-item" data-zh="我要一份橙酒可麗餅。" data-fr="Je voudrais une crêpe Suzette, s'il vous plaît.">
+            <div class="zh">中文：我要一份橙酒可麗餅。</div>
+            <div class="fr">法語：Je voudrais une crêpe Suzette, s'il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Je voudrais une crêpe Suzette, s'il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Je voudrais une crêpe Suzette, s'il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：zhuh voo-dreh ewn krep sew-zet, seel voo pleh</div>
         </div>
         <div class="phrase-item" data-zh="我要一個檸檬塔和一個巧克力閃電泡芙。" data-fr="Je voudrais une tartelette au citron et un éclair au chocolat.">
             <div class="zh">中文：我要一個檸檬塔和一個巧克力閃電泡芙。</div>
@@ -351,8 +449,11 @@
         </div>
     </div>
 
-    <div class="day-card">
-        <h2 class="day-title">Part 3｜餐廳實戰（入座、點餐、結帳）</h2>
+    <div class="day-card" id="part3">
+        <h2 class="day-title">
+            <span>Part 3｜餐廳實戰（入座、點餐、結帳）</span>
+            <button class="btn-part-play" onclick="startPlay(document.getElementById('part3'))">▶️ 播放此區塊</button>
+        </h2>
         <div class="phrase-item" data-zh="你好，我們有三位大人和一位小孩。" data-fr="Bonjour, une table pour trois adultes et un enfant, s'il vous plaît.">
             <div class="zh">中文：你好，我們有三位大人和一位小孩。</div>
             <div class="fr">法語：Bonjour, une table pour trois adultes et un enfant, s'il vous plaît. 
@@ -363,6 +464,18 @@
             </div>
             <div class="pronunciation">發音：bohn-zhoor, ewn tah-bluh poor trwah ah-dult eh uhn ahn-fahn, seel voo pleh</div>
         </div>
+        
+        <div class="phrase-item" data-zh="坐裡面還是戶外？" data-fr="À l'intérieur ou en terrasse ?">
+            <div class="zh">中文：（店員常問）坐裡面還是戶外？</div>
+            <div class="fr">法語：À l'intérieur ou en terrasse ? 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`À l'intérieur ou en terrasse ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`À l'intérieur ou en terrasse ?`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：ah lan-teh-ree-ur oo ahn te-ras</div>
+        </div>
+
         <div class="phrase-item" data-zh="可以給我們一張兒童椅嗎？" data-fr="Avez-vous une chaise haute, s'il vous plaît ?">
             <div class="zh">中文：可以給我們一張兒童椅嗎？</div>
             <div class="fr">法語：Avez-vous une chaise haute, s'il vous plaît ? 
@@ -393,16 +506,6 @@
             </div>
             <div class="pronunciation">發音：keh-skuh voo reh-koh-mahn-day</div>
         </div>
-        <div class="phrase-item" data-zh="給小孩一份兒童餐，飲料要水，不要酒精。" data-fr="Un menu enfant, avec de l'eau, sans alcool s'il vous plaît.">
-            <div class="zh">中文：給小孩一份兒童餐，飲料要水，不要酒精。</div>
-            <div class="fr">法語：Un menu enfant, avec de l'eau, sans alcool s'il vous plaît. 
-                <div class="btn-group">
-                    <button class="btn-normal" onclick="speakManual(`Un menu enfant, avec de l'eau, sans alcool s'il vous plaît.`, 1)">🔊 正常</button>
-                    <button class="btn-slow" onclick="speakManual(`Un menu enfant, avec de l'eau, sans alcool s'il vous plaît.`, 0.6)">🐢 慢速</button>
-                </div>
-            </div>
-            <div class="pronunciation">發音：uhn muh-nu ahn-fahn, ah-vek duh loh, sahn al-kol seel voo pleh</div>
-        </div>
         <div class="phrase-item" data-zh="請給我們一壺免費的自來水。" data-fr="Une carafe d’eau, s'il vous plaît.">
             <div class="zh">中文：請給我們一壺免費的自來水。</div>
             <div class="fr">法語：Une carafe d’eau, s'il vous plaît. 
@@ -413,20 +516,45 @@
             </div>
             <div class="pronunciation">發音：ewn ka-raf doh, seel voo pleh</div>
         </div>
-        <div class="phrase-item" data-zh="很好吃！麻煩結帳。" data-fr="C’était très bon ! L’addition, s’il vous plaît.">
-            <div class="zh">中文：很好吃！麻煩結帳。</div>
-            <div class="fr">法語：C’était très bon ! L’addition, s’il vous plaît. 
+        
+        <div class="phrase-item" data-zh="請問洗手間在哪裡？" data-fr="Où sont les toilettes, s'il vous plaît ?">
+            <div class="zh">中文：請問洗手間在哪裡？</div>
+            <div class="fr">法語：Où sont les toilettes, s'il vous plaît ? 
                 <div class="btn-group">
-                    <button class="btn-normal" onclick="speakManual(`C’était très bon ! L’addition, s’il vous plaît.`, 1)">🔊 正常</button>
-                    <button class="btn-slow" onclick="speakManual(`C’était très bon ! L’addition, s’il vous plaît.`, 0.6)">🐢 慢速</button>
+                    <button class="btn-normal" onclick="speakManual(`Où sont les toilettes, s'il vous plaît ?`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Où sont les toilettes, s'il vous plaît ?`, 0.6)">🐢 慢速</button>
                 </div>
             </div>
-            <div class="pronunciation">發音：say-tay treh boh ! lah-dee-syon, seel voo pleh</div>
+            <div class="pronunciation">發音：oo son lay twa-let, seel voo pleh</div>
+        </div>
+        <div class="phrase-item" data-zh="在最裡面右邊。" data-fr="Au fond à droite.">
+            <div class="zh">中文：（店員常回）在最裡面右邊。</div>
+            <div class="fr">法語：Au fond à droite. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Au fond à droite.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`Au fond à droite.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：oh fohn ah drwaht</div>
+        </div>
+
+        <div class="phrase-item" data-zh="麻煩結帳。" data-fr="L’addition, s’il vous plaît.">
+            <div class="zh">中文：麻煩結帳。</div>
+            <div class="fr">法語：L’addition, s’il vous plaît. 
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`L’addition, s’il vous plaît.`, 1)">🔊 正常</button>
+                    <button class="btn-slow" onclick="speakManual(`L’addition, s’il vous plaît.`, 0.6)">🐢 慢速</button>
+                </div>
+            </div>
+            <div class="pronunciation">發音：lah-dee-syon, seel voo pleh</div>
         </div>
     </div>
 
-    <div class="day-card">
-        <h2 class="day-title">Part 4｜實用單字：必吃甜點與麵包</h2>
+    <div class="day-card" id="part4">
+        <h2 class="day-title">
+            <span>Part 4｜實用單字：必吃甜點與麵包</span>
+            <button class="btn-part-play" onclick="startPlay(document.getElementById('part4'))">▶️ 播放此區塊</button>
+        </h2>
         <div class="numbers-grid">
             <div class="number-box" data-zh="一個檸檬塔" data-fr="Une tartelette au citron">
                 <div class="zh">一個檸檬塔</div>
@@ -464,11 +592,60 @@
                     <button class="btn-slow" onclick="speakManual(`Un croissant`, 0.6)">🐢</button>
                 </div>
             </div>
+            
+            <div class="number-box" data-zh="一份奶油砂糖可麗餅" data-fr="Une crêpe beurre-sucre">
+                <div class="zh">一份奶油砂糖可麗餅</div>
+                <div class="fr">Une crêpe beurre-sucre</div>
+                <div class="pronunciation">ewn krep bur-sew-kr</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Une crêpe beurre-sucre`, 1)">🔊</button>
+                    <button class="btn-slow" onclick="speakManual(`Une crêpe beurre-sucre`, 0.6)">🐢</button>
+                </div>
+            </div>
+            <div class="number-box" data-zh="一份檸檬砂糖可麗餅" data-fr="Une crêpe citron-sucre">
+                <div class="zh">一份檸檬砂糖可麗餅</div>
+                <div class="fr">Une crêpe citron-sucre</div>
+                <div class="pronunciation">ewn krep see-trohn-sew-kr</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Une crêpe citron-sucre`, 1)">🔊</button>
+                    <button class="btn-slow" onclick="speakManual(`Une crêpe citron-sucre`, 0.6)">🐢</button>
+                </div>
+            </div>
+            <div class="number-box" data-zh="一份巧克力榛果醬香蕉可麗餅" data-fr="Une crêpe Nutella-banane">
+                <div class="zh">一份巧克力榛果醬香蕉可麗餅</div>
+                <div class="fr">Une crêpe Nutella-banane</div>
+                <div class="pronunciation">ewn krep noo-tel-lah bah-nahn</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Une crêpe Nutella-banane`, 1)">🔊</button>
+                    <button class="btn-slow" onclick="speakManual(`Une crêpe Nutella-banane`, 0.6)">🐢</button>
+                </div>
+            </div>
+            <div class="number-box" data-zh="一份經典完整蕎麥薄餅" data-fr="Une galette complète">
+                <div class="zh">一份經典完整蕎麥薄餅</div>
+                <div class="fr">Une galette complète</div>
+                <div class="pronunciation">ewn gah-let kohm-plet</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Une galette complète`, 1)">🔊</button>
+                    <button class="btn-slow" onclick="speakManual(`Une galette complète`, 0.6)">🐢</button>
+                </div>
+            </div>
+            <div class="number-box" data-zh="一份橙酒可麗餅" data-fr="Une crêpe Suzette">
+                <div class="zh">一份橙酒可麗餅</div>
+                <div class="fr">Une crêpe Suzette</div>
+                <div class="pronunciation">ewn krep sew-zet</div>
+                <div class="btn-group">
+                    <button class="btn-normal" onclick="speakManual(`Une crêpe Suzette`, 1)">🔊</button>
+                    <button class="btn-slow" onclick="speakManual(`Une crêpe Suzette`, 0.6)">🐢</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="day-card">
-        <h2 class="day-title">Part 5｜實用數字（1-10）</h2>
+    <div class="day-card" id="part5">
+        <h2 class="day-title">
+            <span>Part 5｜實用數字（1-10）</span>
+            <button class="btn-part-play" onclick="startPlay(document.getElementById('part5'))">▶️ 播放此區塊</button>
+        </h2>
         <div class="numbers-grid">
             <div class="number-box" data-zh="一" data-fr="Un">
                 <div class="zh">1</div>
@@ -564,7 +741,8 @@
     </div>
 
     <div class="audio-player-bar">
-        <button class="player-btn btn-play" onclick="startAutoPlay()">▶️ 全文播放</button>
+        <button class="player-btn btn-play" onclick="startPlay(document)">▶️ 全文播放</button>
+        <button id="pauseBtn" class="player-btn btn-pause" onclick="togglePause()">⏸️ 暫停</button>
         <button id="loopToggleBtn" class="player-btn btn-loop" onclick="toggleLoop()">🔁 巡迴: 關</button>
         <button class="player-btn btn-stop" onclick="stopAutoPlay()">⏹️ 停止</button>
     </div>
@@ -581,13 +759,17 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        // === 中法雙語自動播放與巡迴播放邏輯 ===
+        // === 中法雙語自動播放、暫停與巡迴播放邏輯 ===
         let isAutoPlaying = false;
+        let isPaused = false;
         let isLooping = false;
         let playlist = [];
         let currentIndex = 0;
         let currentLang = 'zh'; // 追蹤現在要唸中文還是法文
-        let currentDOMElement = null; // 用來記錄當前正在播放的 DOM 元素，以便加上高亮效果
+        let currentDOMElement = null; 
+        let playTimeout; // 用來記錄 setTimeout，暫停時才能中斷等待時間
+
+        const pauseBtn = document.getElementById('pauseBtn');
 
         function toggleLoop() {
             isLooping = !isLooping;
@@ -601,9 +783,11 @@
             }
         }
 
-        function startAutoPlay() {
-            // 抓取頁面上所有帶有 data-zh 和 data-fr 屬性的容器
-            const items = document.querySelectorAll('.phrase-item, .number-box');
+        // 可以傳入特定的 DOM 元素 (例如某個 Part)，不傳就預設抓整個 document
+        function startPlay(scopeElement) {
+            stopAutoPlay(); // 先重置現有播放
+            
+            const items = scopeElement.querySelectorAll('.phrase-item, .number-box');
             playlist = Array.from(items).map(el => {
                 return {
                     zh: el.getAttribute('data-zh'),
@@ -614,18 +798,42 @@
             
             if (playlist.length === 0) return;
             
-            window.speechSynthesis.cancel();
             isAutoPlaying = true;
+            isPaused = false;
             currentIndex = 0;
-            currentLang = 'zh'; // 從中文開始
-            clearHighlight();
+            currentLang = 'zh'; 
+            pauseBtn.style.display = 'inline-block'; // 顯示暫停按鈕
+            pauseBtn.innerText = '⏸️ 暫停';
+            
             playNextInQueue();
         }
 
         function stopAutoPlay() {
             isAutoPlaying = false;
+            isPaused = false;
+            clearTimeout(playTimeout);
             window.speechSynthesis.cancel();
             clearHighlight();
+            pauseBtn.style.display = 'none'; // 停止後隱藏暫停按鈕
+        }
+
+        function togglePause() {
+            if (!isAutoPlaying) return;
+
+            if (isPaused) {
+                // 繼續播放：從剛剛中斷的索引與語言重新開始這句
+                isPaused = false;
+                pauseBtn.innerText = '⏸️ 暫停';
+                pauseBtn.classList.remove('active');
+                playNextInQueue(); 
+            } else {
+                // 暫停播放：強制中斷正在唸的語音與等待時間
+                isPaused = true;
+                clearTimeout(playTimeout);
+                window.speechSynthesis.cancel();
+                pauseBtn.innerText = '▶️ 繼續';
+                pauseBtn.classList.add('active');
+            }
         }
 
         function clearHighlight() {
@@ -635,7 +843,7 @@
         }
 
         function playNextInQueue() {
-            if (!isAutoPlaying) return;
+            if (!isAutoPlaying || isPaused) return; // 如果被標記暫停，就不往下執行
             
             if (currentIndex >= playlist.length) {
                 clearHighlight();
@@ -643,49 +851,46 @@
                     currentIndex = 0;
                     currentLang = 'zh';
                 } else {
-                    isAutoPlaying = false;
+                    stopAutoPlay();
                     return;
                 }
             }
             
             let item = playlist[currentIndex];
             
-            // 加上高亮效果 (追蹤現在唸到哪裡)
             clearHighlight();
             currentDOMElement = item.element;
             currentDOMElement.classList.add('highlight');
+            
+            // 讓畫面自動捲動到正在唸的地方 (垂直置中)
+            currentDOMElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-            // 決定這一次要唸什麼語言
             let textToSpeak = currentLang === 'zh' ? item.zh : item.fr;
             let langCode = currentLang === 'zh' ? 'zh-TW' : 'fr-FR';
-            let playRate = currentLang === 'zh' ? 1 : 0.85; // 法文稍微放慢，中文正常速度
+            let playRate = currentLang === 'zh' ? 1 : 0.85; 
             
             let utterance = new SpeechSynthesisUtterance(textToSpeak);
             utterance.lang = langCode;
             utterance.rate = playRate;
             
             utterance.onend = function() {
-                if (!isAutoPlaying) return;
+                if (!isAutoPlaying || isPaused) return;
 
                 if (currentLang === 'zh') {
-                    // 中文唸完了，切換成法文，不換下一句
                     currentLang = 'fr';
-                    setTimeout(playNextInQueue, 300); // 中文唸完停頓 0.3 秒唸法文
+                    playTimeout = setTimeout(playNextInQueue, 300); // 中文到法文停頓 0.3 秒
                 } else {
-                    // 法文唸完了，切換回中文，準備唸下一句
                     currentLang = 'zh';
                     currentIndex++;
-                    setTimeout(playNextInQueue, 1200); // 兩組句子之間停頓 1.2 秒，方便記憶
+                    playTimeout = setTimeout(playNextInQueue, 1200); // 兩句之間停頓 1.2 秒
                 }
             };
             
-            // 例外處理：萬一語音 API 出錯卡住，加上錯誤處理確保不崩潰
             utterance.onerror = function() {
-                console.warn("Speech synthesis error, skipping to next.");
-                if(isAutoPlaying) {
+                if(isAutoPlaying && !isPaused) {
                     currentLang = 'zh';
                     currentIndex++;
-                    setTimeout(playNextInQueue, 1000);
+                    playTimeout = setTimeout(playNextInQueue, 1000);
                 }
             };
             
